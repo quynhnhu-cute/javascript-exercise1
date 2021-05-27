@@ -8,11 +8,16 @@
  */
 var calcualteSalary = document.getElementById('btnSalaryCal');
 calcualteSalary.onclick = function () {
+    var salaryEarnText = document.getElementById('salaryEarnText');
     var numberOfWorkingDay = document.getElementById('numberOfWorkingDays');
     var salaryOneDay = 100000;
-    var salaryEarn = salaryOneDay * numberOfWorkingDay.value;
-    var salaryEarnText = document.getElementById('salaryEarnText');
-    salaryEarnText.innerHTML = 'Lương tháng của bạn là : ' + salaryEarn + "VNĐ";
+    if (numberOfWorkingDay.value < 0) {
+        salaryEarnText.innerHTML = 'Số ngày đi làm phải >= 0'
+    }
+    else {
+        var salaryEarn = salaryOneDay * numberOfWorkingDay.value;
+        salaryEarnText.innerHTML = 'Lương tháng của bạn là : ' + salaryEarn + "VNĐ";
+    }
 }
 
 //  BÀI TẬP SỐ 2 
@@ -26,15 +31,15 @@ calcualteSalary.onclick = function () {
  */
 
 var calculateAverage = document.getElementById('btnAverageCal');
-calculateAverage.onclick = function(){
+calculateAverage.onclick = function () {
     var a = parseFloat(document.getElementById('txtNumberOne').value);
     var b = parseFloat(document.getElementById('txtNumberTwo').value);
     var c = parseFloat(document.getElementById('txtNumberThree').value);
     var d = parseFloat(document.getElementById('txtNunberFour').value);
     var e = parseFloat(document.getElementById('txtNumberFive').value);
-    
+
     console.log(typeof a)
-    var average = (a+b+c+d+e) * 1/5;
+    var average = (a + b + c + d + e) * 1 / 5;
     console.log(average);
     var averageResult = document.getElementById('averageResult');
     averageResult.innerHTML = 'Giá trị trung bình của 5 số thực : ' + average;
@@ -52,11 +57,17 @@ calculateAverage.onclick = function(){
 
 var btnChangeMoney = document.getElementById('btnChangeMoney');
 var defaultMoney = 23500;
-btnChangeMoney.onclick = function(){
+btnChangeMoney.onclick = function () {
     var inputMoney = document.getElementById('txtMoneyUSD').value;
-    var outputMoney = inputMoney * defaultMoney;
     var moneyResult = document.getElementById('moneyResult');
-    moneyResult.innerHTML = 'Số tiền VNĐ là: ' + outputMoney + "VNĐ"
+    if (inputMoney < 0) {
+        moneyResult.innerHTML = "Tiền phải lớn hơn 0";
+    } else {
+        var outputMoney = inputMoney * defaultMoney;
+
+        moneyResult.innerHTML = 'Số tiền VNĐ là: ' + outputMoney + "VNĐ";
+    }
+
 }
 
 // BÀI TẬP SỐ 4 
@@ -69,13 +80,19 @@ btnChangeMoney.onclick = function(){
  */
 
 var btnCalculate = document.getElementById('btnCalculate');
-btnCalculate.onclick = function(){
+btnCalculate.onclick = function () {
     var length = parseFloat(document.getElementById('txtLength').value);
     var width = parseFloat(document.getElementById('txtWidth').value);
-    var squareResult = width * length;
-    var perimeterResult = (width + length) * 2;
     var result = document.getElementById('result');
-    result.innerHTML = 'Diện tích và chu vi của hình chữ nhật lần lượt là: ' + squareResult + " ," + perimeterResult;
+    if (width <= 0 || length <= 0) {
+        result.innerHTML = 'Chiều dài và rộng phải > 0';
+    } else {
+        var squareResult = width * length;
+        var perimeterResult = (width + length) * 2;
+
+        result.innerHTML = 'Diện tích và chu vi của hình chữ nhật lần lượt là: ' + squareResult + " ," + perimeterResult;
+    }
+
 }
 
 // BÀI TẬP SỐ 5
@@ -87,13 +104,14 @@ btnCalculate.onclick = function(){
  */
 
 var btnSumNumber = document.getElementById('btnSumNumber');
-btnSumNumber.onclick = function(){
-    var inputNumber = document.getElementById('txtNumber').value;
-    var sum =0;
-    do{
-        sum += inputNumber % 10;      
-        inputNumber = parseInt(inputNumber/10);  
-    }while(inputNumber >= 1);
+btnSumNumber.onclick = function () {
+    var inputNumber = Math.abs(document.getElementById('txtNumber').value);
+
+    var sum = 0;
+    do {
+        sum += inputNumber % 10;
+        inputNumber = parseInt(inputNumber / 10);
+    } while (inputNumber >= 1);
     var sumResult = document.getElementById('sumResult');
-    sumResult.innerHTML = 'Tổng các chữ số là: ' +sum;
+    sumResult.innerHTML = 'Tổng các chữ số là: ' + sum;
 }
